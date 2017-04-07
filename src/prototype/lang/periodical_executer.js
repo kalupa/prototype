@@ -1,3 +1,5 @@
+import Class from './class';
+
 /** section: Language
  * class PeriodicalExecuter
  *

@@ -159,3 +159,5 @@ var Prototype = {
   **/
   K: function(x) { return x }
 };
+
+export default Prototype;

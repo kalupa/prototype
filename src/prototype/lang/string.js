@@ -1,3 +1,4 @@
+import { extend, isFunction } from './object';
 /** section: Language
  * class String
  *
@@ -9,7 +10,7 @@
  *  [[String#sub]] and [[String#gsub]]. Need to parse a query string? We have
  *  [[String#toQueryParams what you need]].
 **/
-Object.extend(String, {
+extend(String, {
   /**
    *  String.interpret(value) -> String
    *
@@ -28,10 +29,10 @@ Object.extend(String, {
   }
 });
 
-Object.extend(String.prototype, (function() {
+extend(String.prototype, (function() {
 
   function prepareReplacement(replacement) {
-    if (Object.isFunction(replacement)) return replacement;
+    if (isFunction(replacement)) return replacement;
     var template = new Template(replacement);
     return function(match) { return template.evaluate(match) };
   }

@@ -1,3 +1,8 @@
+import './prototype/prototype';
+import "./prototype/lang";
+import "./prototype/ajax";
+import "./prototype/dom";
+import "./prototype/deprecated";
 //= compat
 //= require "./prototype/prototype"
 //= require "./prototype/lang"

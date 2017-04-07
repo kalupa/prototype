@@ -1,3 +1,10 @@
+import {Element} from "./dom/dom";
+import "./dom/layout";
+import "./dom/selector";
+// import <selector_engine>;
+import "./dom/form";
+import "./dom/event";
+
 //= compat
 //= require "dom/dom"
 //= require "dom/layout"

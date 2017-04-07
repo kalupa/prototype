@@ -3,7 +3,9 @@
  *
  *  Extensions to the built-in `Function` object.
 **/
-Object.extend(Function.prototype, (function() {
+import { extend } from './object';
+
+extend(Function.prototype, (function() {
   var slice = Array.prototype.slice;
 
   function update(array, args) {
@@ -118,10 +120,10 @@ Object.extend(Function.prototype, (function() {
 
     if (!Object.isFunction(this))
       throw new TypeError("The object is not callable.");
-      
+
     var nop = function() {};
     var __method = this, args = slice.call(arguments, 1);
-    
+
     var bound = function() {
       var a = merge(args, arguments);
       // Ignore the supplied context when the bound function is called with
@@ -129,7 +131,7 @@ Object.extend(Function.prototype, (function() {
       var c = this instanceof bound ? this : context;
       return __method.apply(c, a);
     };
-        
+
     nop.prototype   = this.prototype;
     bound.prototype = new nop();
 
@@ -398,7 +400,7 @@ Object.extend(Function.prototype, (function() {
       return __method.apply(null, a);
     };
   }
-  
+
   var extensions = {
     argumentNames:       argumentNames,
     bindAsEventListener: bindAsEventListener,
@@ -408,10 +410,9 @@ Object.extend(Function.prototype, (function() {
     wrap:                wrap,
     methodize:           methodize
   };
-  
+
   if (!Function.prototype.bind)
     extensions.bind = bind;
 
   return extensions;
 })());
-

@@ -1,3 +1,16 @@
+import "./lang/class";
+import "./lang/object";
+import "./lang/function";
+import "./lang/regexp";
+import "./lang/periodical_executer";
+import "./lang/string";
+import "./lang/template";
+import "./lang/enumerable";
+import "./lang/array";
+import "./lang/hash";
+import "./lang/number";
+import "./lang/range";
+
 //= compat
 //= require "lang/class"
 //= require "lang/object"

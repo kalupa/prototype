@@ -1,3 +1,5 @@
+import Enumerable from './enumerable';
+import { extend, isString, isArray, inspect } from './object';
 /** section: Language, related to: Array
  *  $A(iterable) -> Array
  *
@@ -56,7 +58,7 @@
  *      }
 **/
 
-function $A(iterable) {
+export function $A(iterable) {
   if (!iterable) return [];
   if (iterable.toArray) return iterable.toArray();
   var length = iterable.length || 0, results = new Array(length);
@@ -90,7 +92,7 @@ function $A(iterable) {
 **/
 
 function $w(string) {
-  if (!Object.isString(string)) return [];
+  if (!isString(string)) return [];
   string = string.strip();
   return string ? string.split(/\s+/) : [];
 }
@@ -272,7 +274,7 @@ Array.from = $A;
   **/
   function flatten() {
     return this.inject([], function(array, value) {
-      if (Object.isArray(value))
+      if (isArray(value))
         return array.concat(value.flatten());
       array.push(value);
       return array;
@@ -401,7 +403,7 @@ Array.from = $A;
    *      // -> "['Apples', [object Object], 3, 34]"
   **/
   function inspect() {
-    return '[' + this.map(Object.inspect).join(', ') + ']';
+    return '[' + this.map(inspect).join(', ') + ']';
   }
 
   // Certain ES5 array methods have the same names as Prototype array methods
@@ -442,7 +444,7 @@ Array.from = $A;
   // catching a thrown `$break`. So arrays now use the standard
   // `Enumerable.inject` like they did previously.
 
-  Object.extend(arrayProto, Enumerable);
+  extend(arrayProto, Enumerable);
 
   // Enumerable's `entries` method is no longer safe to mixin to arrays, as
   // it conflicts with an ES6 method. But it can still be mixed into other
@@ -454,7 +456,7 @@ Array.from = $A;
   if (!arrayProto._reverse)
     arrayProto._reverse = arrayProto.reverse;
 
-  Object.extend(arrayProto, {
+  extend(arrayProto, {
     _each:     _each,
 
     map:       map,

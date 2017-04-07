@@ -1,16 +1,18 @@
+import Class from './class';
+import Enumerable from './enumerable';
 /** section: Language, related to: Hash
  *  $H([obj]) -> Hash
- *  
+ *
  *  Creates a [[Hash]] (which is synonymous to "map" or "associative array"
  *  for our purposes). A convenience wrapper around the [[Hash]] constructor, with a safeguard
  *  that lets you pass an existing [[Hash]] object and get it back untouched (instead of
  *  uselessly cloning it).
- *  
+ *
  *  The [[$H]] function is the shorter way to obtain a hash (prior to 1.5 final, it was
  *  the *only* proper way of getting one).
- *  
+ *
  *  ##### Example
- *  
+ *
  *      var h = $H({name: 'John', age: 26, country: 'Australia'});
  *      // Equivalent to:
  *      var h = new Hash({name: 'John', age: 26, country: 'Australia'});
@@ -186,11 +188,11 @@ var Hash = Class.create(Enumerable, (function() {
   /** related to: Object.toJSON, alias of: Hash#toObject
    *  Hash#toJSON() -> Object
   **/
-  
+
   /** alias of: Hash#toObject
    *  Hash#toTemplateReplacements() -> Object
   **/
-  
+
   /**
    *  Hash#keys() -> [String...]
    *
@@ -290,7 +292,7 @@ var Hash = Class.create(Enumerable, (function() {
   // Private. No PDoc necessary.
   function toQueryPair(key, value) {
     if (Object.isUndefined(value)) return key;
-    
+
     value = String.interpret(value);
 
     // Normalize newlines as \r\n because the HTML spec says newlines should
@@ -345,7 +347,7 @@ var Hash = Class.create(Enumerable, (function() {
   function toQueryString() {
     return this.inject([], function(results, pair) {
       var key = encodeURIComponent(pair.key), values = pair.value;
-      
+
       if (values && typeof values == 'object') {
         if (Object.isArray(values)) {
           // We used to use `Array#map` here to get the query pair for each
@@ -356,7 +358,7 @@ var Hash = Class.create(Enumerable, (function() {
           var queryValues = [];
           for (var i = 0, len = values.length, value; i < len; i++) {
             value = values[i];
-            queryValues.push(toQueryPair(key, value));            
+            queryValues.push(toQueryPair(key, value));
           }
           return results.concat(queryValues);
         }

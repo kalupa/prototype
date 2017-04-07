@@ -19,7 +19,7 @@
  *  explore objects as if they were hashes, will turn to [[Object.extend]],
  *  [[Object.keys]], and [[Object.values]].
 **/
-(function() {
+// (function() {
 
   var _toString = Object.prototype.toString,
       NULL_TYPE = 'Null',
@@ -65,7 +65,7 @@
    *  Do not mistake this method with its quasi-namesake [[Element.extend]],
    *  which implements Prototype's (much more complex) DOM extension mechanism.
   **/
-  function extend(destination, source) {
+  export function extend(destination, source) {
     for (var property in source)
       destination[property] = source[property];
     return destination;
@@ -103,7 +103,7 @@
    *      Object.inspect('hello');
    *      // -> "'hello'"
   **/
-  function inspect(object) {
+  export function inspect(object) {
     try {
       if (isUndefined(object)) return 'undefined';
       if (object === null) return 'null';
@@ -136,7 +136,7 @@
    *      Object.toJSON(data);
    *      //-> '{"name": "Violet", "occupation": "character", "age": 25, "pets": ["frog","rabbit"]}'
   **/
-  function toJSON(value) {
+  export function toJSON(value) {
     return JSON.stringify(value);
   }
 
@@ -222,7 +222,7 @@
    *      Object.toQueryString({ action: 'ship', order_id: 123, fees: ['f1', 'f2'], 'label': 'a demo' })
    *      // -> 'action=ship&order_id=123&fees=f1&fees=f2&label=a+demo'
   **/
-  function toQueryString(object) {
+  export function toQueryString(object) {
     return $H(object).toQueryString();
   }
 
@@ -274,7 +274,7 @@
    *      Object.toHTML(123);
    *      //-> "123"
   **/
-  function toHTML(object) {
+  export function toHTML(object) {
     return object && object.toHTML ? object.toHTML() : String.interpret(object);
   }
 
@@ -299,7 +299,7 @@
    *      Object.values({ name: 'Prototype', version: '1.6.1' }).sort();
    *      // -> ['1.6.1', 'Prototype']
   **/
-  function values(object) {
+  export function values(object) {
     var results = [];
     for (var property in object)
       results.push(object[property]);
@@ -340,7 +340,7 @@
    *      original.values[0];
    *      // -> "magenta" (it's a shallow copy, so they share the array)
   **/
-  function clone(object) {
+  export function clone(object) {
     return extend({ }, object);
   }
 
@@ -364,7 +364,7 @@
    *      Object.isElement(document.createTextNode('foo'));
    *      //-> false
   **/
-  function isElement(object) {
+  export function isElement(object) {
     return !!(object && object.nodeType == 1);
   }
 
@@ -385,7 +385,7 @@
    *      Object.isArray({ });
    *      //-> false
   **/
-  var isArray = Array.isArray;
+  export let isArray = Array.isArray;
 
   /**
    *  Object.isHash(object) -> Boolean
@@ -405,7 +405,7 @@
    *      Object.isHash({ });
    *      //-> false
   **/
-  function isHash(object) {
+  export function isHash(object) {
     return object instanceof Hash;
   }
 
@@ -423,7 +423,7 @@
    *      Object.isFunction(123);
    *      //-> false
   **/
-  function isFunction(object) {
+  export function isFunction(object) {
     return _toString.call(object) === FUNCTION_CLASS;
   }
 
@@ -444,7 +444,7 @@
    *      Object.isString(123);
    *      //-> false
   **/
-  function isString(object) {
+  export function isString(object) {
     return _toString.call(object) === STRING_CLASS;
   }
 
@@ -465,7 +465,7 @@
    *      Object.isNumber("foo");
    *      //-> false
   **/
-  function isNumber(object) {
+  export function isNumber(object) {
     return _toString.call(object) === NUMBER_CLASS;
   }
 
@@ -486,7 +486,7 @@
    *      Object.isDate(new Date("Dec 25, 1995"));
    *      //-> true
   **/
-  function isDate(object) {
+  export function isDate(object) {
     return _toString.call(object) === DATE_CLASS;
   }
 
@@ -513,11 +513,12 @@
    *      Object.isUndefined("");
    *      //-> false
   **/
-  function isUndefined(object) {
+  export function isUndefined(object) {
     return typeof object === "undefined";
   }
 
-  extend(Object, {
+  // extend(Object, {
+  export default {
     extend:        extend,
     inspect:       inspect,
     toJSON:        toJSON,
@@ -533,5 +534,6 @@
     isNumber:      isNumber,
     isDate:        isDate,
     isUndefined:   isUndefined
-  });
-})();
+  }
+  // );
+// })();

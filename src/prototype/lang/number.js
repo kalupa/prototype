@@ -1,3 +1,4 @@
+import { extend } from './object';
 /** section: Language
  * class Number
  *
@@ -12,7 +13,7 @@
  *  * Instance-method aliases of many functions in the `Math` namespace.
  *
 **/
-Object.extend(Number.prototype, (function() {
+extend(Number.prototype, (function() {
   /**
    *  Number#toColorPart() -> String
    *
