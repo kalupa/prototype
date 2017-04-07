@@ -5,3 +5,4 @@ test/unit/browsers.yml
 doc
 tmp
 *.pdoc.yaml
+node_modules
